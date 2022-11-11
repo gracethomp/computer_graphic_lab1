@@ -3,9 +3,11 @@
 #include <OpenGL/glu.h>
 #include <GLUT/glut.h>
 
+
+
 using namespace std;
 
-float x1=0.0f,y1=0.0f;
+float x1=0.0f, y2 = 0.0f;
 
 GLvoid InitGL(GLvoid);
 GLvoid DrawGLScene(GLvoid);
@@ -35,7 +37,7 @@ GLvoid DrawGLScene(GLvoid)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
-    glTranslatef(-1.5f + x1,0.0f + y1,-13.0f);
+    glTranslatef(-1.5f + x1,0.0f,-13.0f);
     glColor3ub(126.0f, 191.0f, 69.0f);
     drawAnimal();
     glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
@@ -116,17 +118,21 @@ void move(int key, int x, int y)
 {
     switch(key)
     {
-        case 'a':
-            x1-=1.0;
+        case 'a': {
+            x1-= 1.0;
             break;
-            case 'd':
-                x1+=1.0;
-                break;
-                case 'w':
-                    y1+=0.0;
-                    break;
-                    case 's':
-                        y1-=0.0;
-                        break;
+        }
+        case 'd': {
+            x1+= 1.0;
+            break;
+        }
+        case 'w': {
+            y2 += 0.0;
+            break;
+        }
+        case 's': {
+            y2 -= 0.0;
+            break;
+        }
     }
 }

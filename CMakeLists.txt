@@ -11,3 +11,6 @@ find_package(GLUT REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIRS} ${GLUT_INCLUDE_DIRS})
 
 target_link_libraries(untitled9 ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
+
+find_package(glm REQUIRED)
+target_link_libraries(untitled9 glm::glm)
