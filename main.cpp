@@ -24,12 +24,12 @@ int main(int argc, char** argv)
     glutReshapeFunc(ReSizeGLScene);
     glutSpecialFunc(move);
     glutIdleFunc(DrawGLScene);
-    glutMainLoop();
+    glutMainLoop(); //стартует программу
 
     return 0;
 }
 
-GLvoid DrawGLScene(GLvoid)
+void DrawGLScene(GLvoid)
 {
     glClear(GL_COLOR_BUFFER_BIT); //очищаем буффер цвета
     glLoadIdentity(); //сбрасываем все переносы/масштабирования и тд
@@ -43,58 +43,59 @@ GLvoid DrawGLScene(GLvoid)
     drawAnimal();
     glFlush();
 }
-
-
-GLvoid ReSizeGLScene(int Width, int Height)
+// - функция изменения размера сцены каждый раз когда окно меняет размер
+// - она будет вызвана как минимум один раз когда программа впервые запустится
+// - сцена опенгл будет менять размер основываясь на ширине и высоте окна
+void ReSizeGLScene(int Width, int Height)
 {
-    glViewport(0,0,Width,Height); //задаем окно просмотра
-
-    glMatrixMode(GL_PROJECTION); //
-    glLoadIdentity();
-
-    gluPerspective(45.0f,(GLfloat)Width/(GLfloat)Height,0.1f,100.0f);
-
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+    glViewport(0,0,Width,Height); //сбрасываем текущее окно просмотра
+    glMatrixMode(GL_PROJECTION); //команды относятся к проекту
+    glLoadIdentity(); //сбрасываем текущую матрицу
+    //рассчитывает соотношение сторон окна
+    //fovy - угол видимости
+    //aspect - соотношение сторон
+    gluPerspective(50.0f,(float)Width/(float)Height,10.0f,20.0f);
+    glMatrixMode(GL_MODELVIEW); //команды относятся к просмотру
+    glLoadIdentity(); //сбрасываем текущую матрицу
 }
 
 void drawAnimal() {
     glBegin(GL_TRIANGLES); // Drawing Using Triangles
-        glVertex2f( 0.0f, 1.0f);		// Top
-        glVertex2f(0.0f,-1.0f);		// Bottom Left
-        glVertex2f( 2.0f,-1.0f);		// Bottom Right
+        glVertex2f( -2.0f, 1.0f);		// Top
+        glVertex2f(-2.0f,-1.0f);		// Bottom Left
+        glVertex2f( 0.0f,-1.0f);		// Bottom Right
     glEnd();
     glBegin(GL_TRIANGLES); // Drawing Using Triangles
-        glVertex2f( 1.0f, 2.5f);		// Top
-        glVertex2f( 0.0f, 1.5f);		// Bottom Left
-        glVertex2f( 1.0f,1.5f);		// Bottom Right
+        glVertex2f( -1.0f, 2.5f);		// Top
+        glVertex2f( -2.0f, 1.5f);		// Bottom Left
+        glVertex2f( -1.0f,1.5f);		// Bottom Right
     glEnd();
     glBegin(GL_TRIANGLES); // Drawing Using Triangles
-        glVertex2f( 3.0f, 0.0f);		// Top
+        glVertex2f( 1.0f, 0.0f);		// Top
+        glVertex2f( -1.0f, 0.0f);		// Bottom Left
+        glVertex2f( 1.0f,-2.0f);		// Bottom Right
+    glEnd();
+    glBegin(GL_TRIANGLES); // Drawing Using Triangles
+        glVertex2f( 2.0f, 1.0f);		// Top
         glVertex2f( 1.0f, 0.0f);		// Bottom Left
-        glVertex2f( 3.0f,-2.0f);		// Bottom Right
+        glVertex2f( 2.0f,0.0f);		// Bottom Right
     glEnd();
     glBegin(GL_TRIANGLES); // Drawing Using Triangles
-        glVertex2f( 4.0f, 1.0f);		// Top
-        glVertex2f( 3.0f, 0.0f);		// Bottom Left
-        glVertex2f( 4.0f,0.0f);		// Bottom Right
-    glEnd();
-    glBegin(GL_TRIANGLES); // Drawing Using Triangles
-        glVertex2f( 3.0f,-1.0f);	    // Top
-        glVertex2f( 3.0f,-3.0f);		// Bottom Left
-        glVertex2f( 4.0f,-2.0f);			// Bottom Right
+        glVertex2f( 1.0f,-1.0f);	    // Top
+        glVertex2f( 1.0f,-3.0f);		// Bottom Left
+        glVertex2f( 2.0f,-2.0f);			// Bottom Right
     glEnd();
     glBegin(GL_QUADS);				// Draw A Quad
-        glVertex2f(-1.0f, 1.5f);		// Top Left
-        glVertex2f( 0.0f, 1.5f);		// Top Right
-        glVertex2f( 0.0f,0.5f);		// Bottom Right
-        glVertex2f(-1.0f,0.5f);		// Bottom Left
+        glVertex2f(-3.0f, 1.5f);		// Top Left
+        glVertex2f( -2.0f, 1.5f);		// Top Right
+        glVertex2f( -2.0f,0.5f);		// Bottom Right
+        glVertex2f(-3.0f,0.5f);		// Bottom Left
     glEnd();
     glBegin(GL_QUADS);				// Draw A Quad
-        glVertex2f(-0.5f,-1.0f);	    // Top Left
-        glVertex2f( 1.0f,-1.0f);		// Top Right
-        glVertex2f( 0.5f,-2.0f);		// Bottom Right
-        glVertex2f(-1.0f,-2.0f);		// Bottom Left
+        glVertex2f(-2.5f,-1.0f);	    // Top Left
+        glVertex2f( -1.0f,-1.0f);		// Top Right
+        glVertex2f( -1.5f,-2.0f);		// Bottom Right
+        glVertex2f(-3.0f,-2.0f);		// Bottom Left
     glEnd();
 }
 
