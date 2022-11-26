@@ -31,16 +31,16 @@ int main(int argc, char** argv)
 
 GLvoid DrawGLScene(GLvoid)
 {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glLoadIdentity();
+    glClear(GL_COLOR_BUFFER_BIT); //очищаем буффер цвета
+    glLoadIdentity(); //сбрасываем все переносы/масштабирования и тд
 
-    glTranslatef(-1.5f + x1,0.0f + y2 ,-13.0f);
-    glColor3ub(126.0f, 191.0f, 69.0f);
+    glTranslatef(0.0f + x1,0.0f + y2 ,-20); //сдвиг системы координат
+    glPolygonMode(GL_FRONT_AND_BACK,GL_FILL); //режим рисования - заполнение фигуры
+    glColor3ub(126.0f, 191.0f, 69.0f); //задаем цвет, которым будем рисовать
     drawAnimal();
-    glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
-    glColor3ub(0.0f, 0.0f, 0.0f);
+    glPolygonMode(GL_FRONT_AND_BACK,GL_LINE); //устанавливаем режим рисования - линия
+    glColor3ub(0.0f, 0.0f, 0.0f); //цвет линии
     drawAnimal();
-    glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
     glFlush();
 }
 
